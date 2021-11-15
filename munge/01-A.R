@@ -38,13 +38,13 @@ fully_participated_run7 = filter(cyber_security_7_enrolments, fully_participated
                                  highest_education_level != "Unknown", employment_status != "Unknown",
                                  employment_area != "Unknown")
 
-fully_participated_run1
-fully_participated_run2
-fully_participated_run3
-fully_participated_run4
-fully_participated_run5
-fully_participated_run6
-fully_participated_run7
+fully_participated_run1 = fully_participated_run1 %>% mutate(run_number="Run 1")
+fully_participated_run2 = fully_participated_run2 %>% mutate(run_number="Run 2")
+fully_participated_run3 = fully_participated_run3 %>% mutate(run_number="Run 3")
+fully_participated_run4 = fully_participated_run4 %>% mutate(run_number="Run 4")
+fully_participated_run5 = fully_participated_run5 %>% mutate(run_number="Run 5")
+fully_participated_run6 = fully_participated_run6 %>% mutate(run_number="Run 6")
+fully_participated_run7 = fully_participated_run7 %>% mutate(run_number="Run 7")
 
 fully_participated_runs = merge(fully_participated_run1,fully_participated_run2, all = TRUE)
 fully_participated_runs = merge(fully_participated_runs, fully_participated_run3, all = TRUE)
