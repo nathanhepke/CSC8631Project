@@ -1,4 +1,6 @@
 # Example preprocessing script.
+library(dplyr)
+
 View(cyber_security_1_enrolments)
 View(cyber_security_6_enrolments)
 View(cyber_security_7_enrolments)
@@ -65,7 +67,7 @@ fully_participated_runs
 unique(fully_participated_runs$country)
 
 # adding a region column
-fully_participated_runs %>% mutate (region = case_when(country %in%
+fully_participated_runs <- mutate (fully_participated_runs, region = case_when(country %in%
                                                          c("GB","PT","IT","GR","CH","IE","DE","BY","FR","MD",
                                                            "UA","NL","SE","AT","ME","ES","CY","AL","RS","MT","AZ")~ "Europe",
                                                        country %in% c("JP","IN","SA","OM","TH","MM","YE","IQ","MY","PH","ID","LK",
@@ -79,7 +81,14 @@ fully_participated_runs %>% mutate (region = case_when(country %in%
 # adding a time column from first enrolled to time participated
 library(lubridate)
 time_completed_in_secs = as_datetime(fully_participated_runs$fully_participated_at)- as_datetime(fully_participated_runs$enrolled_at)
-time_completed_in_minutes = time_completed_in_secs / 60
+time_completed_in_days = time_completed_in_secs / 86400
 
 # adding the time column
-fully_participated_runs %>% mutate 
+fully_participated_runs <- mutate (fully_participated_runs, time_completed_in_days = time_completed_in_days)
+
+View(fully_participated_runs)
+
+#removing columns that are not needed 
+fully_participated_runs <- select(fully_participated_runs, -c(unenrolled_at, purchased_statement_at, time_completed_in_days))
+
+View(fully_participated_runs)
